@@ -64,8 +64,8 @@ public class LifeCorridors : Life
 	}
 	public override int GetNextState(int x, int y)
 	{
-		if(x == 0 || y == 0 || x == MX - 1 || y == MY - 1)
-			return 1;
+		//if(x == 0 || y == 0 || x == MX - 1 || y == MY - 1)
+		//	return 1;
 		int living1 = GetHV(x, y, 1);
 		int living2 = GetHV(x, y, 2);
 		int l1X = GetH(x, y, 1);

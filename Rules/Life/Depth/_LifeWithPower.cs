@@ -51,29 +51,23 @@ public class LifeWithPower : Life
 	}
 	protected virtual Color getNegativeColor(int m)
 	{
-		return Color.FromArgb(255, m * 5, 0, 0);
+		return Color.FromArgb(255, 100 + m * 5, 0, 0);
 	}
-	protected virtual Color getPositiveColor(int dx)
+	protected virtual Color getPositiveColor(int m)
 	{
-		return Color.FromArgb(255, (int)255 * dx, (int)255 * dx, (int)0);
+		return Color.FromArgb(255, (int)255 * (m/max), (int)255 * (m/max), (int)0);
 	}
 
 	public override Color GetColor(int s)
 	{
 		int m = Math.Abs(s);
 		if(s <= 0)
-		{
-			m = 10 - m;
 			return getNegativeColor(m);
 			// WATERCOLOR return Color.FromArgb(255, 0, m * 5, m * 10);
 			// OBSIDIAN   return Color.FromArgb(255, m * 5, 0, 0);
-		}
 		else
-		{
-			var dx = m / this.max;
-			return getPositiveColor(dx);
+			return getPositiveColor(m);
 			// WATERCOLOR return Color.FromArgb(255, (int)(m * 5), (int)(m * 15), 0);
 			// OBSIDIAN   return Color.FromArgb(255, 55 + (int)(m * 10), 0, 25 + (int)(m * 5));
-		}
 	}
 }
