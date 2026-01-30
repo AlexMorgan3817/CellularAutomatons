@@ -43,11 +43,13 @@
 			jumpsize = new NumericUpDown();
 			AutomatonSelector = new ComboBox();
 			panel1 = new Panel();
+			panel4 = new Panel();
 			SizeX = new NumericUpDown();
 			SizeY = new NumericUpDown();
 			Apply = new Button();
-			Scale = new NumericUpDown();
-			label1 = new Label();
+			panel5 = new Panel();
+			DownScale2 = new Button();
+			Scalex2 = new Button();
 			((System.ComponentModel.ISupportInitialize)fieldBox).BeginInit();
 			Settings.SuspendLayout();
 			panel3.SuspendLayout();
@@ -56,9 +58,10 @@
 			((System.ComponentModel.ISupportInitialize)AliveProb).BeginInit();
 			((System.ComponentModel.ISupportInitialize)jumpsize).BeginInit();
 			panel1.SuspendLayout();
+			panel4.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)SizeX).BeginInit();
 			((System.ComponentModel.ISupportInitialize)SizeY).BeginInit();
-			((System.ComponentModel.ISupportInitialize)Scale).BeginInit();
+			panel5.SuspendLayout();
 			SuspendLayout();
 			// 
 			// fieldBox
@@ -67,7 +70,7 @@
 			fieldBox.Dock = DockStyle.Fill;
 			fieldBox.Location = new Point(0, 0);
 			fieldBox.Name = "fieldBox";
-			fieldBox.Size = new Size(968, 296);
+			fieldBox.Size = new Size(970, 650);
 			fieldBox.SizeMode = PictureBoxSizeMode.StretchImage;
 			fieldBox.TabIndex = 0;
 			fieldBox.TabStop = false;
@@ -81,9 +84,9 @@
 			Settings.Controls.Add(panel2);
 			Settings.Controls.Add(panel1);
 			Settings.Dock = DockStyle.Bottom;
-			Settings.Location = new Point(0, 188);
+			Settings.Location = new Point(0, 542);
 			Settings.Name = "Settings";
-			Settings.Size = new Size(968, 108);
+			Settings.Size = new Size(970, 108);
 			Settings.TabIndex = 1;
 			Settings.TabStop = false;
 			Settings.Enter += Settings_Enter;
@@ -96,7 +99,7 @@
 			panel3.Controls.Add(StopSim);
 			panel3.Controls.Add(StepSize);
 			panel3.Dock = DockStyle.Right;
-			panel3.Location = new Point(750, 23);
+			panel3.Location = new Point(752, 23);
 			panel3.Name = "panel3";
 			panel3.Size = new Size(215, 82);
 			panel3.TabIndex = 21;
@@ -166,7 +169,7 @@
 			panel2.Dock = DockStyle.Fill;
 			panel2.Location = new Point(220, 23);
 			panel2.Name = "panel2";
-			panel2.Size = new Size(745, 82);
+			panel2.Size = new Size(747, 82);
 			panel2.TabIndex = 20;
 			// 
 			// RandomizeSetup
@@ -224,21 +227,30 @@
 			// 
 			// panel1
 			// 
-			panel1.Controls.Add(SizeX);
-			panel1.Controls.Add(SizeY);
-			panel1.Controls.Add(Apply);
-			panel1.Controls.Add(Scale);
-			panel1.Controls.Add(label1);
+			panel1.Controls.Add(panel4);
+			panel1.Controls.Add(panel5);
 			panel1.Dock = DockStyle.Left;
 			panel1.Location = new Point(3, 23);
 			panel1.Name = "panel1";
 			panel1.Size = new Size(217, 82);
 			panel1.TabIndex = 19;
 			// 
+			// panel4
+			// 
+			panel4.AutoSize = true;
+			panel4.Controls.Add(SizeX);
+			panel4.Controls.Add(SizeY);
+			panel4.Controls.Add(Apply);
+			panel4.Dock = DockStyle.Fill;
+			panel4.Location = new Point(42, 0);
+			panel4.Name = "panel4";
+			panel4.Size = new Size(175, 82);
+			panel4.TabIndex = 3;
+			// 
 			// SizeX
 			// 
 			SizeX.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-			SizeX.Location = new Point(9, 21);
+			SizeX.Location = new Point(3, 51);
 			SizeX.Maximum = new decimal(new int[] { 2000, 0, 0, 0 });
 			SizeX.Name = "SizeX";
 			SizeX.Size = new Size(58, 27);
@@ -248,7 +260,7 @@
 			// SizeY
 			// 
 			SizeY.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-			SizeY.Location = new Point(9, 50);
+			SizeY.Location = new Point(3, 23);
 			SizeY.Maximum = new decimal(new int[] { 2000, 0, 0, 0 });
 			SizeY.Name = "SizeY";
 			SizeY.Size = new Size(58, 27);
@@ -258,7 +270,7 @@
 			// Apply
 			// 
 			Apply.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-			Apply.Location = new Point(73, 38);
+			Apply.Location = new Point(67, 34);
 			Apply.Name = "Apply";
 			Apply.Size = new Size(60, 29);
 			Apply.TabIndex = 2;
@@ -266,35 +278,43 @@
 			Apply.UseVisualStyleBackColor = true;
 			Apply.Click += Apply_Click;
 			// 
-			// Scale
+			// panel5
 			// 
-			Scale.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-			Scale.Location = new Point(139, 50);
-			Scale.Maximum = new decimal(new int[] { 64, 0, 0, 0 });
-			Scale.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-			Scale.Name = "Scale";
-			Scale.ReadOnly = true;
-			Scale.Size = new Size(58, 27);
-			Scale.TabIndex = 7;
-			Scale.Value = new decimal(new int[] { 1, 0, 0, 0 });
-			Scale.ValueChanged += Scale_ValueChanged;
+			panel5.AutoSize = true;
+			panel5.Controls.Add(DownScale2);
+			panel5.Controls.Add(Scalex2);
+			panel5.Dock = DockStyle.Left;
+			panel5.Location = new Point(0, 0);
+			panel5.Name = "panel5";
+			panel5.Size = new Size(42, 82);
+			panel5.TabIndex = 3;
 			// 
-			// label1
+			// DownScale2
 			// 
-			label1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-			label1.AutoSize = true;
-			label1.Location = new Point(139, 27);
-			label1.Name = "label1";
-			label1.Size = new Size(44, 20);
-			label1.TabIndex = 8;
-			label1.Text = "Scale";
+			DownScale2.Location = new Point(0, 34);
+			DownScale2.Name = "DownScale2";
+			DownScale2.Size = new Size(39, 29);
+			DownScale2.TabIndex = 1;
+			DownScale2.Text = "/2";
+			DownScale2.UseVisualStyleBackColor = true;
+			DownScale2.Click += DownScale2_Click;
+			// 
+			// Scalex2
+			// 
+			Scalex2.Location = new Point(0, 0);
+			Scalex2.Name = "Scalex2";
+			Scalex2.Size = new Size(39, 29);
+			Scalex2.TabIndex = 0;
+			Scalex2.Text = "x2";
+			Scalex2.UseVisualStyleBackColor = true;
+			Scalex2.Click += Scalex2_Click;
 			// 
 			// GameWindow
 			// 
 			AutoScaleDimensions = new SizeF(8F, 20F);
 			AutoScaleMode = AutoScaleMode.Font;
 			BackColor = SystemColors.Control;
-			ClientSize = new Size(968, 296);
+			ClientSize = new Size(970, 650);
 			Controls.Add(Settings);
 			Controls.Add(fieldBox);
 			MaximizeBox = false;
@@ -311,9 +331,10 @@
 			((System.ComponentModel.ISupportInitialize)jumpsize).EndInit();
 			panel1.ResumeLayout(false);
 			panel1.PerformLayout();
+			panel4.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)SizeX).EndInit();
 			((System.ComponentModel.ISupportInitialize)SizeY).EndInit();
-			((System.ComponentModel.ISupportInitialize)Scale).EndInit();
+			panel5.ResumeLayout(false);
 			ResumeLayout(false);
 		}
 
@@ -326,8 +347,6 @@
 		private Button Apply;
 		private Button RandomizeSetup;
 		private Button DoStep;
-		private Label label1;
-		private NumericUpDown Scale;
 		private Label label2;
 		private NumericUpDown StepSize;
 		private Button StartSim;
@@ -339,5 +358,9 @@
 		private Panel panel1;
 		private Panel panel3;
 		private Panel panel2;
+		private Panel panel4;
+		private Panel panel5;
+		private Button DownScale2;
+		private Button Scalex2;
 	}
 }

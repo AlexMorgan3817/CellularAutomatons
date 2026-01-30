@@ -7,7 +7,7 @@ public partial class GameWindow : Form
 	private Random rand = new Random();
 	private System.Windows.Forms.Timer loop = new System.Windows.Forms.Timer();
 
-	private ScaledBitmap p;
+	private Bitmap p;
 	private CellAutomaton Field; // TODO: Separate Matrix from CellAutomaton, let NextStep() be just strategy for processing them
 
 	private Dictionary<string, Type> availableAutomatons = new Dictionary<string, Type>
@@ -29,6 +29,8 @@ public partial class GameWindow : Form
 
 	public int X { get { return (int)SizeX.Value; } set { SizeX.Value = value; } }
 	public int Y { get { return (int)SizeY.Value; } set { SizeY.Value = value; } }
+	public int W { get { return p.Width; } set { return; } }
+	public int H { get { return p.Height; } set { return; } }
 
 	public GameWindow()
 	{
@@ -49,6 +51,7 @@ public partial class GameWindow : Form
 		{
 			s.Items.Add(item);
 		}
+		s.SelectedIndex = 0;
 	}
 	private void AutomatonSelector_SelectedIndexChanged(object sender, EventArgs e)
 	{
@@ -56,12 +59,15 @@ public partial class GameWindow : Form
 
 		var key = (string)s.Items[s.SelectedIndex];
 
-		if (availableAutomatons.TryGetValue(key, out var type))
+		if(availableAutomatons.TryGetValue(key, out var type))
 		{
 			if(typeof(CellAutomaton).IsAssignableFrom(type))
 			{
 				var nF = (CellAutomaton)Activator.CreateInstance(type);
-				nF.Matrix = Field.Matrix;
+				if(Field != null)
+					nF.Matrix = Field.Matrix;
+				else
+					nF.Matrix = CellAutomaton.ExtendArray(nF.Matrix, X, Y);
 				Field = nF;
 			}
 		}
@@ -94,7 +100,7 @@ public partial class GameWindow : Form
 		Field.MY = y;
 		SetEpochs(0);
 		Field.AliveProbability = (int)AliveProb.Value;
-		p = new(x, y, (int)Scale.Value);
+		p = new(x, y);
 		UpdateField();
 	}
 	public void MakeStep()
@@ -123,7 +129,7 @@ public partial class GameWindow : Form
 		for(int x = 0; x < Field.MX; x++)
 			for(int y = 0; y < Field.MY; y++)
 				p.SetPixel(x, y, GetColor(Field.Matrix[x, y]));
-		fieldBox.Image = p.src;
+		fieldBox.Image = p;
 	}
 
 	public void RandomizeField()
@@ -136,7 +142,7 @@ public partial class GameWindow : Form
 	#region UI
 	public void SyncWindowSize()
 	{
-		Size = new Size(Math.Max(818, p.src.Width), Math.Max(497, p.src.Height) + YSizeOfSettings * 2);
+		Size = new Size(Math.Max(818, W), Math.Max(497, H) + YSizeOfSettings * 2);
 	}
 
 	public void ToogleSettings()
@@ -192,12 +198,6 @@ public partial class GameWindow : Form
 		StopSim_Click(sender, e);
 		loop.Interval = (int)Math.Max(StepSize.Value, 1);
 	}
-
-	private void Scale_ValueChanged(object sender, EventArgs e)
-	{
-		p = new(p.X, p.Y, (int)Scale.Value);
-		UpdateField();
-	}
 	private void AliveProb_ValueChanged(object sender, EventArgs e)
 	{
 		Field.AliveProbability = (int)AliveProb.Value;
@@ -217,5 +217,17 @@ public partial class GameWindow : Form
 	private void epochs_label_Click(object sender, EventArgs e)
 	{
 
+	}
+
+	private void Scalex2_Click(object sender, EventArgs e)
+	{
+		X *= 2;
+		Y *= 2;
+	}
+
+	private void DownScale2_Click(object sender, EventArgs e)
+	{
+		X /= 2;
+		Y /= 2;
 	}
 }
