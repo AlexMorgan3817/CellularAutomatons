@@ -36,7 +36,6 @@ public partial class GameWindow : Form
 	{
 		InitializeComponent();
 		InitAutomatonsSelector(AutomatonSelector);
-		Field = new LifeConway();
 		RebuildField(X, Y);
 		loop.Tick += new EventHandler(GameLoop);
 
