@@ -42,7 +42,6 @@ public class LifeCorridors : Life
 			count++;
 		return count;
 	}
-
 	private int GetDiagonal(int x, int y)
 	{
 		int count = 0;
@@ -63,7 +62,7 @@ public class LifeCorridors : Life
 		}
 		return count;
 	}
-	protected override int GetNextState(int x, int y)
+	public override int GetNextState(int x, int y)
 	{
 		if(x == 0 || y == 0 || x == MX - 1 || y == MY - 1)
 			return 1;

@@ -35,7 +35,7 @@ public class LifeIslands : Life
 		}
 		return count;
 	}
-	protected override int GetNextState(int x, int y)
+	public override int GetNextState(int x, int y)
 	{
 		int living = CountLivings(x, y);
 		int state = Matrix[x, y];
@@ -57,6 +57,11 @@ public class LifeIslands : Life
 		for(int x = 0; x < MX; x++)
 			for(int y = 0; y < MY; y++)
 			{
+				if(x == 0 || y == 0 || x == MX-1 || y == MY-1)
+				{
+					Matrix[x, y] = 10;
+					continue;
+				}
 				if(rand.Next(0, 101) > AliveProbability)
 				{
 					Matrix[x, y] = rand.Next(1, 11);

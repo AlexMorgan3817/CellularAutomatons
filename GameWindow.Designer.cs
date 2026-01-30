@@ -28,252 +28,243 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.fieldBox = new System.Windows.Forms.PictureBox();
-			this.Settings = new System.Windows.Forms.GroupBox();
-			this.StopSim = new System.Windows.Forms.Button();
-			this.AliveProb = new System.Windows.Forms.NumericUpDown();
-			this.label2 = new System.Windows.Forms.Label();
-			this.StepSize = new System.Windows.Forms.NumericUpDown();
-			this.StartSim = new System.Windows.Forms.Button();
-			this.label1 = new System.Windows.Forms.Label();
-			this.Scale = new System.Windows.Forms.NumericUpDown();
-			this.DoStep = new System.Windows.Forms.Button();
-			this.RandomizeSetup = new System.Windows.Forms.Button();
-			this.Apply = new System.Windows.Forms.Button();
-			this.SizeY = new System.Windows.Forms.NumericUpDown();
-			this.SizeX = new System.Windows.Forms.NumericUpDown();
-			((System.ComponentModel.ISupportInitialize)(this.fieldBox)).BeginInit();
-			this.Settings.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.AliveProb)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.StepSize)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.Scale)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.SizeY)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.SizeX)).BeginInit();
-			this.SuspendLayout();
+			fieldBox = new PictureBox();
+			Settings = new GroupBox();
+			epochs_label = new Label();
+			jumpsize = new NumericUpDown();
+			StopSim = new Button();
+			AliveProb = new NumericUpDown();
+			label2 = new Label();
+			StepSize = new NumericUpDown();
+			StartSim = new Button();
+			label1 = new Label();
+			Scale = new NumericUpDown();
+			DoStep = new Button();
+			RandomizeSetup = new Button();
+			Apply = new Button();
+			SizeY = new NumericUpDown();
+			SizeX = new NumericUpDown();
+			((System.ComponentModel.ISupportInitialize)fieldBox).BeginInit();
+			Settings.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)jumpsize).BeginInit();
+			((System.ComponentModel.ISupportInitialize)AliveProb).BeginInit();
+			((System.ComponentModel.ISupportInitialize)StepSize).BeginInit();
+			((System.ComponentModel.ISupportInitialize)Scale).BeginInit();
+			((System.ComponentModel.ISupportInitialize)SizeY).BeginInit();
+			((System.ComponentModel.ISupportInitialize)SizeX).BeginInit();
+			SuspendLayout();
 			// 
 			// fieldBox
 			// 
-			this.fieldBox.BackColor = System.Drawing.SystemColors.WindowFrame;
-			this.fieldBox.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.fieldBox.Location = new System.Drawing.Point(0, 0);
-			this.fieldBox.Name = "fieldBox";
-			this.fieldBox.Size = new System.Drawing.Size(800, 450);
-			this.fieldBox.TabIndex = 0;
-			this.fieldBox.TabStop = false;
-			this.fieldBox.Click += new System.EventHandler(this.GameField_Click);
+			fieldBox.BackColor = SystemColors.WindowFrame;
+			fieldBox.Dock = DockStyle.Fill;
+			fieldBox.Location = new Point(0, 0);
+			fieldBox.Name = "fieldBox";
+			fieldBox.Size = new Size(1074, 450);
+			fieldBox.SizeMode = PictureBoxSizeMode.StretchImage;
+			fieldBox.TabIndex = 0;
+			fieldBox.TabStop = false;
+			fieldBox.Click += GameField_Click;
+			fieldBox.Paint += pictureBox1_Paint;
 			// 
 			// Settings
 			// 
-			this.Settings.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-			this.Settings.Controls.Add(this.StopSim);
-			this.Settings.Controls.Add(this.AliveProb);
-			this.Settings.Controls.Add(this.label2);
-			this.Settings.Controls.Add(this.StepSize);
-			this.Settings.Controls.Add(this.StartSim);
-			this.Settings.Controls.Add(this.label1);
-			this.Settings.Controls.Add(this.Scale);
-			this.Settings.Controls.Add(this.DoStep);
-			this.Settings.Controls.Add(this.RandomizeSetup);
-			this.Settings.Controls.Add(this.Apply);
-			this.Settings.Controls.Add(this.SizeY);
-			this.Settings.Controls.Add(this.SizeX);
-			this.Settings.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.Settings.Location = new System.Drawing.Point(0, 373);
-			this.Settings.Name = "Settings";
-			this.Settings.Size = new System.Drawing.Size(800, 77);
-			this.Settings.TabIndex = 1;
-			this.Settings.TabStop = false;
+			Settings.BackColor = SystemColors.ButtonHighlight;
+			Settings.Controls.Add(epochs_label);
+			Settings.Controls.Add(jumpsize);
+			Settings.Controls.Add(StopSim);
+			Settings.Controls.Add(AliveProb);
+			Settings.Controls.Add(label2);
+			Settings.Controls.Add(StepSize);
+			Settings.Controls.Add(StartSim);
+			Settings.Controls.Add(label1);
+			Settings.Controls.Add(Scale);
+			Settings.Controls.Add(DoStep);
+			Settings.Controls.Add(RandomizeSetup);
+			Settings.Controls.Add(Apply);
+			Settings.Controls.Add(SizeY);
+			Settings.Controls.Add(SizeX);
+			Settings.Dock = DockStyle.Bottom;
+			Settings.Location = new Point(0, 360);
+			Settings.Name = "Settings";
+			Settings.Size = new Size(1074, 90);
+			Settings.TabIndex = 1;
+			Settings.TabStop = false;
+			Settings.Enter += Settings_Enter;
+			// 
+			// epochs_label
+			// 
+			epochs_label.Anchor = AnchorStyles.Bottom;
+			epochs_label.AutoSize = true;
+			epochs_label.Location = new Point(618, 23);
+			epochs_label.Name = "epochs_label";
+			epochs_label.Size = new Size(44, 20);
+			epochs_label.TabIndex = 17;
+			epochs_label.Text = "Scale";
+			// 
+			// jumpsize
+			// 
+			jumpsize.Anchor = AnchorStyles.Bottom;
+			jumpsize.Location = new Point(539, 56);
+			jumpsize.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
+			jumpsize.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+			jumpsize.Name = "jumpsize";
+			jumpsize.Size = new Size(73, 27);
+			jumpsize.TabIndex = 16;
+			jumpsize.Value = new decimal(new int[] { 1, 0, 0, 0 });
 			// 
 			// StopSim
 			// 
-			this.StopSim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.StopSim.Enabled = false;
-			this.StopSim.Location = new System.Drawing.Point(694, 43);
-			this.StopSim.Name = "StopSim";
-			this.StopSim.Size = new System.Drawing.Size(94, 29);
-			this.StopSim.TabIndex = 13;
-			this.StopSim.Text = "Stop";
-			this.StopSim.UseVisualStyleBackColor = true;
-			this.StopSim.Click += new System.EventHandler(this.StopSim_Click);
+			StopSim.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+			StopSim.Enabled = false;
+			StopSim.Location = new Point(968, 56);
+			StopSim.Name = "StopSim";
+			StopSim.Size = new Size(94, 29);
+			StopSim.TabIndex = 13;
+			StopSim.Text = "Stop";
+			StopSim.UseVisualStyleBackColor = true;
+			StopSim.Click += StopSim_Click;
 			// 
 			// AliveProb
 			// 
-			this.AliveProb.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-			this.AliveProb.Location = new System.Drawing.Point(446, 9);
-			this.AliveProb.Name = "AliveProb";
-			this.AliveProb.Size = new System.Drawing.Size(73, 27);
-			this.AliveProb.TabIndex = 12;
-			this.AliveProb.Value = new decimal(new int[] {
-            49,
-            0,
-            0,
-            0});
-			this.AliveProb.ValueChanged += new System.EventHandler(this.AliveProb_ValueChanged);
+			AliveProb.Anchor = AnchorStyles.Bottom;
+			AliveProb.Location = new Point(539, 23);
+			AliveProb.Name = "AliveProb";
+			AliveProb.Size = new Size(73, 27);
+			AliveProb.TabIndex = 12;
+			AliveProb.Value = new decimal(new int[] { 49, 0, 0, 0 });
+			AliveProb.ValueChanged += AliveProb_ValueChanged;
 			// 
 			// label2
 			// 
-			this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(608, 12);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(70, 20);
-			this.label2.TabIndex = 11;
-			this.label2.Text = "Step Size";
+			label2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+			label2.AutoSize = true;
+			label2.Location = new Point(882, 25);
+			label2.Name = "label2";
+			label2.Size = new Size(70, 20);
+			label2.TabIndex = 11;
+			label2.Text = "Step Size";
 			// 
 			// StepSize
 			// 
-			this.StepSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.StepSize.Location = new System.Drawing.Point(684, 10);
-			this.StepSize.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-			this.StepSize.Name = "StepSize";
-			this.StepSize.Size = new System.Drawing.Size(104, 27);
-			this.StepSize.TabIndex = 10;
-			this.StepSize.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.StepSize.ValueChanged += new System.EventHandler(this.StepSize_ValueChanged);
+			StepSize.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+			StepSize.Location = new Point(958, 23);
+			StepSize.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
+			StepSize.Name = "StepSize";
+			StepSize.Size = new Size(104, 27);
+			StepSize.TabIndex = 10;
+			StepSize.Value = new decimal(new int[] { 1, 0, 0, 0 });
+			StepSize.ValueChanged += StepSize_ValueChanged;
 			// 
 			// StartSim
 			// 
-			this.StartSim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.StartSim.Location = new System.Drawing.Point(594, 43);
-			this.StartSim.Name = "StartSim";
-			this.StartSim.Size = new System.Drawing.Size(94, 29);
-			this.StartSim.TabIndex = 9;
-			this.StartSim.Text = "Begin";
-			this.StartSim.UseVisualStyleBackColor = true;
-			this.StartSim.Click += new System.EventHandler(this.StartSim_Click);
+			StartSim.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+			StartSim.Location = new Point(868, 56);
+			StartSim.Name = "StartSim";
+			StartSim.Size = new Size(94, 29);
+			StartSim.TabIndex = 9;
+			StartSim.Text = "Begin";
+			StartSim.UseVisualStyleBackColor = true;
+			StartSim.Click += StartSim_Click;
 			// 
 			// label1
 			// 
-			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(197, 15);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(44, 20);
-			this.label1.TabIndex = 8;
-			this.label1.Text = "Scale";
+			label1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+			label1.AutoSize = true;
+			label1.Location = new Point(197, 28);
+			label1.Name = "label1";
+			label1.Size = new Size(44, 20);
+			label1.TabIndex = 8;
+			label1.Text = "Scale";
 			// 
 			// Scale
 			// 
-			this.Scale.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.Scale.Location = new System.Drawing.Point(197, 38);
-			this.Scale.Maximum = new decimal(new int[] {
-            64,
-            0,
-            0,
-            0});
-			this.Scale.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.Scale.Name = "Scale";
-			this.Scale.Size = new System.Drawing.Size(58, 27);
-			this.Scale.TabIndex = 7;
-			this.Scale.Value = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-			this.Scale.ValueChanged += new System.EventHandler(this.Scale_ValueChanged);
+			Scale.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+			Scale.Location = new Point(197, 51);
+			Scale.Maximum = new decimal(new int[] { 64, 0, 0, 0 });
+			Scale.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+			Scale.Name = "Scale";
+			Scale.ReadOnly = true;
+			Scale.Size = new Size(58, 27);
+			Scale.TabIndex = 7;
+			Scale.Value = new decimal(new int[] { 1, 0, 0, 0 });
+			Scale.ValueChanged += Scale_ValueChanged;
 			// 
 			// DoStep
 			// 
-			this.DoStep.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-			this.DoStep.Location = new System.Drawing.Point(346, 42);
-			this.DoStep.Name = "DoStep";
-			this.DoStep.Size = new System.Drawing.Size(94, 29);
-			this.DoStep.TabIndex = 6;
-			this.DoStep.Text = "Step";
-			this.DoStep.UseVisualStyleBackColor = true;
-			this.DoStep.Click += new System.EventHandler(this.DoStep_Click);
+			DoStep.Anchor = AnchorStyles.Bottom;
+			DoStep.Location = new Point(439, 56);
+			DoStep.Name = "DoStep";
+			DoStep.Size = new Size(94, 29);
+			DoStep.TabIndex = 6;
+			DoStep.Text = "Step";
+			DoStep.UseVisualStyleBackColor = true;
+			DoStep.Click += DoStep_Click;
 			// 
 			// RandomizeSetup
 			// 
-			this.RandomizeSetup.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-			this.RandomizeSetup.Location = new System.Drawing.Point(346, 7);
-			this.RandomizeSetup.Name = "RandomizeSetup";
-			this.RandomizeSetup.Size = new System.Drawing.Size(94, 29);
-			this.RandomizeSetup.TabIndex = 4;
-			this.RandomizeSetup.Text = "Randomize setup";
-			this.RandomizeSetup.UseVisualStyleBackColor = true;
-			this.RandomizeSetup.Click += new System.EventHandler(this.RandomizeSetup_Click);
+			RandomizeSetup.Anchor = AnchorStyles.Bottom;
+			RandomizeSetup.Location = new Point(439, 21);
+			RandomizeSetup.Name = "RandomizeSetup";
+			RandomizeSetup.Size = new Size(94, 29);
+			RandomizeSetup.TabIndex = 4;
+			RandomizeSetup.Text = "Randomize setup";
+			RandomizeSetup.UseVisualStyleBackColor = true;
+			RandomizeSetup.Click += RandomizeSetup_Click;
 			// 
 			// Apply
 			// 
-			this.Apply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.Apply.Location = new System.Drawing.Point(76, 26);
-			this.Apply.Name = "Apply";
-			this.Apply.Size = new System.Drawing.Size(60, 29);
-			this.Apply.TabIndex = 2;
-			this.Apply.Text = "Apply";
-			this.Apply.UseVisualStyleBackColor = true;
-			this.Apply.Click += new System.EventHandler(this.Apply_Click);
+			Apply.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+			Apply.Location = new Point(76, 39);
+			Apply.Name = "Apply";
+			Apply.Size = new Size(60, 29);
+			Apply.TabIndex = 2;
+			Apply.Text = "Apply";
+			Apply.UseVisualStyleBackColor = true;
+			Apply.Click += Apply_Click;
 			// 
 			// SizeY
 			// 
-			this.SizeY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.SizeY.Location = new System.Drawing.Point(12, 38);
-			this.SizeY.Maximum = new decimal(new int[] {
-            2000,
-            0,
-            0,
-            0});
-			this.SizeY.Name = "SizeY";
-			this.SizeY.Size = new System.Drawing.Size(58, 27);
-			this.SizeY.TabIndex = 1;
-			this.SizeY.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
+			SizeY.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+			SizeY.Location = new Point(12, 51);
+			SizeY.Maximum = new decimal(new int[] { 2000, 0, 0, 0 });
+			SizeY.Name = "SizeY";
+			SizeY.Size = new Size(58, 27);
+			SizeY.TabIndex = 1;
+			SizeY.Value = new decimal(new int[] { 100, 0, 0, 0 });
 			// 
 			// SizeX
 			// 
-			this.SizeX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.SizeX.Location = new System.Drawing.Point(12, 9);
-			this.SizeX.Maximum = new decimal(new int[] {
-            2000,
-            0,
-            0,
-            0});
-			this.SizeX.Name = "SizeX";
-			this.SizeX.Size = new System.Drawing.Size(58, 27);
-			this.SizeX.TabIndex = 0;
-			this.SizeX.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
+			SizeX.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+			SizeX.Location = new Point(12, 22);
+			SizeX.Maximum = new decimal(new int[] { 2000, 0, 0, 0 });
+			SizeX.Name = "SizeX";
+			SizeX.Size = new Size(58, 27);
+			SizeX.TabIndex = 0;
+			SizeX.Value = new decimal(new int[] { 100, 0, 0, 0 });
 			// 
 			// GameWindow
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackColor = System.Drawing.SystemColors.Control;
-			this.ClientSize = new System.Drawing.Size(800, 450);
-			this.Controls.Add(this.Settings);
-			this.Controls.Add(this.fieldBox);
-			this.MaximizeBox = false;
-			this.Name = "GameWindow";
-			this.Text = "Form1";
-			((System.ComponentModel.ISupportInitialize)(this.fieldBox)).EndInit();
-			this.Settings.ResumeLayout(false);
-			this.Settings.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.AliveProb)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.StepSize)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.Scale)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.SizeY)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.SizeX)).EndInit();
-			this.ResumeLayout(false);
-
+			AutoScaleDimensions = new SizeF(8F, 20F);
+			AutoScaleMode = AutoScaleMode.Font;
+			BackColor = SystemColors.Control;
+			ClientSize = new Size(1074, 450);
+			Controls.Add(Settings);
+			Controls.Add(fieldBox);
+			MaximizeBox = false;
+			Name = "GameWindow";
+			Text = "Form1";
+			SizeChanged += GameWindow_SizeChanged;
+			((System.ComponentModel.ISupportInitialize)fieldBox).EndInit();
+			Settings.ResumeLayout(false);
+			Settings.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)jumpsize).EndInit();
+			((System.ComponentModel.ISupportInitialize)AliveProb).EndInit();
+			((System.ComponentModel.ISupportInitialize)StepSize).EndInit();
+			((System.ComponentModel.ISupportInitialize)Scale).EndInit();
+			((System.ComponentModel.ISupportInitialize)SizeY).EndInit();
+			((System.ComponentModel.ISupportInitialize)SizeX).EndInit();
+			ResumeLayout(false);
 		}
 
 		#endregion
@@ -292,5 +283,7 @@
 		private Button StartSim;
 		private NumericUpDown AliveProb;
 		private Button StopSim;
+		private NumericUpDown jumpsize;
+		private Label epochs_label;
 	}
 }

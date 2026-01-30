@@ -15,9 +15,23 @@ public abstract class CellAutomaton
 		MY = mY;
 		Matrix = new int[MX, MY];
 	}
+	public int GetState(int x, int y)
+	{
+		if(x < 0 || y < 0 || x >= MX || y >= MY)
+		{
+			return 0;
+		}
+		return Matrix[x, y];
+	}
 
-	protected abstract int GetNextState(int x, int y);
+	public abstract int GetNextState(int x, int y);
 	public abstract void Randomize(Random rand);
+	public virtual Color GetColor(int s)
+	{
+		if(s >= 1)
+			return Color.Green;
+		return Color.Black;
+	}
 	public void Process()
 	{
 		int[,] nextStates = new int[MX, MY];

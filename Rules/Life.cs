@@ -16,7 +16,6 @@ public abstract class Life : CellAutomaton
 					continue;
 				}
 				Matrix[x, y] = 0;
-
 			}
 	}
 }

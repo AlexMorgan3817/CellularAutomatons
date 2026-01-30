@@ -1,11 +1,14 @@
 ﻿namespace GameOfLife.Rules;
 
-public class LifeWithPower : CellAutomaton
+public class LifeWithPower : Life
 {
+	public int max = 10;
+	public int min = -10;
+
 	public LifeWithPower(int mX, int mY) : base(mX, mY)
 	{
 	}
-	protected int CountLivings(int x, int y)
+	public virtual int CountLivings(int x, int y)
 	{
 		int count = 0;
 		for(int i = -1; i <= 1; i++)
@@ -20,7 +23,7 @@ public class LifeWithPower : CellAutomaton
 			}
 		return count;
 	}
-	protected override int GetNextState(int x, int y)
+	public override int GetNextState(int x, int y)
 	{
 		int living = CountLivings(x, y);
 		int state = Matrix[x, y];
@@ -31,11 +34,11 @@ public class LifeWithPower : CellAutomaton
 			if(living < 4 || 6 < living)
 				state -= 1;
 			else
-				state = Math.Clamp(state + 1, -10, 10);
-			return Math.Clamp(state - dead, -10, 10);
+				state = Math.Clamp(state + 1, min, max);
+			return Math.Clamp(state - dead, min, max);
 		}
 		else
-			return Math.Clamp(state + living, -10, 10);
+			return Math.Clamp(state + living, min, max);
 	}
 	public override void Randomize(Random rand)
 	{
@@ -43,12 +46,36 @@ public class LifeWithPower : CellAutomaton
 			for(int y = 0; y < MY; y++)
 			{
 				if(rand.Next(0, 101) > AliveProbability)
-				{
-					Matrix[x, y] = rand.Next(1, 11);
-					continue;
-				}
-				Matrix[x, y] = rand.Next(-10, 1);
-
+					Matrix[x, y] = rand.Next(1, max + 1);
+				else
+					Matrix[x, y] = rand.Next(min, 1);
 			}
+	}
+	protected virtual Color getNegativeColor(int m)
+	{
+		return Color.FromArgb(255, m * 5, 0, 0);
+	}
+	protected virtual Color getPositiveColor(int dx)
+	{
+		return Color.FromArgb(255, (int)255 * dx, (int)255 * dx, (int)0);
+	}
+
+	public override Color GetColor(int s)
+	{
+		int m = Math.Abs(s);
+		if(s <= 0)
+		{
+			m = 10 - m;
+			return getNegativeColor(m);
+			// WATERCOLOR return Color.FromArgb(255, 0, m * 5, m * 10);
+			// OBSIDIAN   return Color.FromArgb(255, m * 5, 0, 0);
+		}
+		else
+		{
+			var dx = m / this.max;
+			return getPositiveColor(dx);
+			// WATERCOLOR return Color.FromArgb(255, (int)(m * 5), (int)(m * 15), 0);
+			// OBSIDIAN   return Color.FromArgb(255, 55 + (int)(m * 10), 0, 25 + (int)(m * 5));
+		}
 	}
 }

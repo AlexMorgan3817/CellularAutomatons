@@ -19,13 +19,13 @@ public class LifeConway : Life
 			}
 		return count;
 	}
-	protected override int GetNextState(int x, int y)
+	public override int GetNextState(int x, int y)
 	{
 		int state = Matrix[x, y];
 		int living = CountLivings(x, y);
 		if(state >= 1)
 			living--;
-		if(living < 2 || living > 3)
+		if(living < 2 || 3 < living)
 			return 0;
 		else
 		if(living == 3)

@@ -1,3 +1,4 @@
+using CellularAutomatons.Rules;
 using GameOfLife.Rules;
 
 namespace GameOfLife;
@@ -8,54 +9,71 @@ public partial class GameWindow : Form
 	private System.Windows.Forms.Timer loop = new System.Windows.Forms.Timer();
 
 	private ScaledBitmap p;
-	private LifeConway Field;
-	private bool UsingLifeWithPower = false;
+	private CellAutomaton Field;
 
-	public int YSizeOfSettings = 77;
+	private int YSizeOfSettings = 77;
+
+	public int epochs = 0;
 
 	public GameWindow()
 	{
 		InitializeComponent();
 		int x = (int)SizeX.Value;
 		int y = (int)SizeY.Value;
-		Field = new(x, y);
-		p = new(x, y, (int)Scale.Value);
-		UpdateField();
+		RebuildField(x, y);
 		loop.Tick += new EventHandler(GameLoop);
+		SyncWindowSize();
 	}
+	private void pictureBox1_Paint(object sender, PaintEventArgs e)
+	{
+		PictureBox pb = (PictureBox)sender;
+		if(pb.Image == null)
+			return;
+		var g = e.Graphics;
+		g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+		g.DrawImage(
+			pb.Image,
+			new Rectangle(0, 0, pb.Width, pb.Height),
+			new Rectangle(0, 0, pb.Image.Width, pb.Image.Height),
+			GraphicsUnit.Pixel
+		);
+	}
+
+
+	private Color GetColor(int s)
+	{
+		return Field.GetColor(s);
+	}
+
 	private void RebuildField(int x, int y)
 	{
-		Field = new(x, y);
+		Field = new LifeCaves2(x, y);
+		SetEpochs(0);
+		Field.AliveProbability = (int)AliveProb.Value;
 		p = new(x, y, (int)Scale.Value);
 		UpdateField();
 	}
 	public void MakeStep()
 	{
-		Field.Process();
+		makeStep((int)jumpsize.Value, false);
 		UpdateField();
+	}
+	public void makeStep(int v = 1, bool update = true)
+	{
+		for(var i = 0; i < v; i++)
+			Field.Process();
+		if(update)
+			UpdateField();
+		SetEpochs(epochs + v);
+		epochs_label.Text = epochs.ToString();
+	}
+	private void SetEpochs(int v)
+	{
+		epochs = v;
+		epochs_label.Text = epochs.ToString();
 	}
 	private void GameLoop(Object myObject, EventArgs myEventArgs) => MakeStep();
 
-	private Color GetColor(int s)
-	{
-		if(UsingLifeWithPower)
-		{
-			int m = Math.Abs(s);
-			if(s <= 0)
-			{
-				m = 10 - m;
-				return Color.FromArgb(255, m * 5, m * 5, m * 5);
-			}
-			else
-				return Color.FromArgb(255, 0, 55 + (int)(m * 20), 0);
-		}
-		else
-		{
-			if(s == 1)
-				return Color.Green;
-			return Color.Black;
-		}
-	}
 	private void UpdateField()
 	{
 		for(int x = 0; x < Field.MX; x++)
@@ -66,21 +84,15 @@ public partial class GameWindow : Form
 
 	public void RandomizeField()
 	{
+		SetEpochs(0);
 		Field.Randomize(rand);
-		
-		/*Field.Matrix[1, 3] = 1;
-		Field.Matrix[2, 4] = 1;
-		Field.Matrix[3, 2] = 1;
-		Field.Matrix[3, 3] = 1;
-		Field.Matrix[3, 4] = 1;*/
-
 		UpdateField();
 	}
 
 	#region UI
 	public void SyncWindowSize()
 	{
-		Size = new Size(Math.Max(818, p.src.Width), Math.Max(497, p.src.Height) + YSizeOfSettings*2);
+		Size = new Size(Math.Max(818, p.src.Width), Math.Max(497, p.src.Height) + YSizeOfSettings * 2);
 	}
 
 	public void ToogleSettings()
@@ -96,7 +108,7 @@ public partial class GameWindow : Form
 	private void Apply_Click(object sender, EventArgs e)
 	{
 		RebuildField((int)SizeX.Value, (int)SizeY.Value);
-		SyncWindowSize();
+		//SyncWindowSize();
 	}
 	private void GameField_Click(object sender, EventArgs e)
 	{
@@ -105,7 +117,7 @@ public partial class GameWindow : Form
 	private void RandomizeSetup_Click(object sender, EventArgs e)
 	{
 		RandomizeField();
-		SyncWindowSize();
+		//SyncWindowSize();
 	}
 	private void DoStep_Click(object sender, EventArgs e)
 	{
@@ -133,7 +145,8 @@ public partial class GameWindow : Form
 	}
 	private void StepSize_ValueChanged(object sender, EventArgs e)
 	{
-		loop.Interval = (int)StepSize.Value;
+		StopSim_Click(sender, e);
+		loop.Interval = (int)Math.Max(StepSize.Value, 1);
 	}
 
 	private void Scale_ValueChanged(object sender, EventArgs e)
@@ -146,4 +159,14 @@ public partial class GameWindow : Form
 		Field.AliveProbability = (int)AliveProb.Value;
 	}
 	#endregion
+
+	private void GameWindow_SizeChanged(object sender, EventArgs e)
+	{
+		//fieldBox.Width;
+	}
+
+	private void Settings_Enter(object sender, EventArgs e)
+	{
+
+	}
 }
