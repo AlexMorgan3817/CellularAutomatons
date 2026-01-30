@@ -2,7 +2,7 @@
 
 public class LifeCorridors : Life
 {
-	public LifeCorridors(int mX, int mY) : base(mX, mY)
+	public LifeCorridors() : base()
 	{}
 	private int GetHV(int x, int y, int range)
 	{

@@ -3,7 +3,7 @@
 public class LifeIslands : Life
 {
 	public int MergingCoefficient = 1;
-	public LifeIslands(int mX, int mY) : base(mX, mY)
+	public LifeIslands() : base()
 	{
 	}
 	protected int CountLivings(int x, int y)

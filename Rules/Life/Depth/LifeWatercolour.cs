@@ -1,17 +1,7 @@
-﻿using GameOfLife;
-using GameOfLife.Rules;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CellularAutomatons.Rules;
+﻿namespace GameOfLife.Rules;
 public class LifeWatercolour : LifeWithPower
 {
-	public LifeWatercolour(int mX, int mY) : base(mX, mY)
-	{
-	}
+	public LifeWatercolour() : base(){}
 	public override int CountLivings(int x, int y)
 	{
 		int count = 0;

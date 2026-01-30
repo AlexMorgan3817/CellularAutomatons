@@ -1,6 +1,4 @@
-﻿using GameOfLife.Rules;
-
-namespace CellularAutomatons.Rules;
+﻿namespace GameOfLife.Rules;
 internal class LifeHeat : LifeWithPower
 {
 	public int OutTemp = -272;
@@ -8,7 +6,7 @@ internal class LifeHeat : LifeWithPower
 	public float beta = .3f;
 	public float gamma = .1f;
 
-	public LifeHeat(int mX, int mY) : base(mX, mY)
+	public LifeHeat() : base()
 	{
 		min = -273;
 		max = 1000;

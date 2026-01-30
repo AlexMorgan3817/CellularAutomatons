@@ -1,15 +1,7 @@
-﻿using GameOfLife;
-using GameOfLife.Rules;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CellularAutomatons.Rules;
+﻿namespace GameOfLife.Rules;
 public class LifeBurntObsidian : LifeWithPower
 {
-	public LifeBurntObsidian(int mX, int mY) : base(mX, mY)
+	public LifeBurntObsidian() : base()
 	{
 	}
 	public override int CountLivings(int x, int y)

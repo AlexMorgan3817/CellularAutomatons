@@ -2,8 +2,7 @@
 
 public abstract class Life : CellAutomaton
 {
-	public Life(int mX, int mY) : base(mX, mY)
-	{ }
+	public Life() : base() { }
 
 	public override void Randomize(Random rand)
 	{

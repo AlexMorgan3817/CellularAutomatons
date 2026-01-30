@@ -2,8 +2,6 @@
 
 public class LifeConway : Life
 {
-	public LifeConway(int mX, int mY) : base(mX, mY)
-	{}
 	protected int CountLivings(int x, int y)
 	{
 		int count = 0;

@@ -1,4 +1,3 @@
-using CellularAutomatons.Rules;
 using GameOfLife.Rules;
 
 namespace GameOfLife;
@@ -9,20 +8,64 @@ public partial class GameWindow : Form
 	private System.Windows.Forms.Timer loop = new System.Windows.Forms.Timer();
 
 	private ScaledBitmap p;
-	private CellAutomaton Field;
+	private CellAutomaton Field; // TODO: Separate Matrix from CellAutomaton, let NextStep() be just strategy for processing them
 
+	private Dictionary<string, Type> availableAutomatons = new Dictionary<string, Type>
+	{
+		{"Conway"                  , typeof(LifeConway)         }   ,
+		{"Corridors"               , typeof(LifeCorridors)      }   ,
+		{"Heat"                    , typeof(LifeHeat)           }   ,
+		{"Islands"                 , typeof(LifeIslands)        }   ,
+		{"WithPower"               , typeof(LifeWithPower)      }   ,
+		{"BurntObsidian"           , typeof(LifeBurntObsidian)  }   ,
+		{"Caves2"                  , typeof(LifeCaves2)         }   ,
+		{"DepthMap"                , typeof(LifeDepthMap)       }   ,
+		{"FiryWatercolour"         , typeof(LifeFiryWatercolour)}   ,
+		{"Watercolour"             , typeof(LifeWatercolour)    }   ,
+	};
 	private int YSizeOfSettings = 77;
 
 	public int epochs = 0;
 
+	public int X { get { return (int)SizeX.Value; } set { SizeX.Value = value; } }
+	public int Y { get { return (int)SizeY.Value; } set { SizeY.Value = value; } }
+
 	public GameWindow()
 	{
 		InitializeComponent();
-		int x = (int)SizeX.Value;
-		int y = (int)SizeY.Value;
-		RebuildField(x, y);
+		InitAutomatonsSelector(AutomatonSelector);
+		Field = new LifeConway();
+		RebuildField(X, Y);
 		loop.Tick += new EventHandler(GameLoop);
+
 		SyncWindowSize();
+	}
+	private void InitAutomatonsSelector(ComboBox s)
+	{
+		if(s.Items.Count != 0)
+			return;
+		s.Items.Clear();
+		foreach(var item in availableAutomatons.Keys)
+		{
+			s.Items.Add(item);
+		}
+	}
+	private void AutomatonSelector_SelectedIndexChanged(object sender, EventArgs e)
+	{
+		var s = (ComboBox)sender;
+
+		var key = (string)s.Items[s.SelectedIndex];
+
+		if (availableAutomatons.TryGetValue(key, out var type))
+		{
+			if(typeof(CellAutomaton).IsAssignableFrom(type))
+			{
+				var nF = (CellAutomaton)Activator.CreateInstance(type);
+				nF.Matrix = Field.Matrix;
+				Field = nF;
+			}
+		}
+
 	}
 	private void pictureBox1_Paint(object sender, PaintEventArgs e)
 	{
@@ -47,7 +90,8 @@ public partial class GameWindow : Form
 
 	private void RebuildField(int x, int y)
 	{
-		Field = new LifeCaves2(x, y);
+		Field.MX = x;
+		Field.MY = y;
 		SetEpochs(0);
 		Field.AliveProbability = (int)AliveProb.Value;
 		p = new(x, y, (int)Scale.Value);
@@ -166,6 +210,11 @@ public partial class GameWindow : Form
 	}
 
 	private void Settings_Enter(object sender, EventArgs e)
+	{
+
+	}
+
+	private void epochs_label_Click(object sender, EventArgs e)
 	{
 
 	}

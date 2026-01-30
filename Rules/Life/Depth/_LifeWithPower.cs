@@ -5,9 +5,7 @@ public class LifeWithPower : Life
 	public int max = 10;
 	public int min = -10;
 
-	public LifeWithPower(int mX, int mY) : base(mX, mY)
-	{
-	}
+	public LifeWithPower() : base() {}
 	public virtual int CountLivings(int x, int y)
 	{
 		int count = 0;
